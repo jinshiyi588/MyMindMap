@@ -5,11 +5,18 @@
 
 	<TableLayout android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:weightSum="1">
+
 		<TableRow>
-			<ProgressBar android:layout_width="fill_parent" android:paddingLeft="220dip" android:paddingTop="100dip" android:paddingRight="140dip" android:layout_height="wrap_content" android:id="@+id/progressBar1" style="@style/loading"></ProgressBar>
+			<ProgressBar android:layout_width="fill_parent"
+				android:paddingLeft="220dip" android:paddingTop="100dip"
+				android:paddingRight="140dip" android:layout_height="wrap_content"
+				android:id="@+id/progressBar1" style="@style/loading"></ProgressBar>
 		</TableRow>
+
 		<TableRow>
-			<TextView android:id="@+id/tvInfo" android:layout_weight="0.24" android:text="TextView" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
+			<TextView android:id="@+id/tvInfo" android:layout_weight="0.24"
+				android:text="TextView" android:layout_height="wrap_content"
+				android:layout_width="wrap_content"></TextView>
 		</TableRow>
 	</TableLayout>
 

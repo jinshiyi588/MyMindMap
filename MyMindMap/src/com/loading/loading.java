@@ -25,10 +25,12 @@ public class loading extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,    WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏  
-		setContentView(R.layout.loading);
-		tvInfo = (TextView)findViewById(R.id.tvInfo);
-		initSystem();
+		
+		//设置全屏  
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.loading);//loading界面
+		tvInfo = (TextView)findViewById(R.id.tvInfo);//为了显示进度说明，如：初始化1...
+		initSystem();//初始化
 
 	}
 
@@ -40,11 +42,11 @@ public class loading extends Activity {
 
 	public Handler mHandler = new Handler(){     
 		public void handleMessage(Message msg){
-			if(msg.what == MSG_INIT_TIMEOUT){    
+			if(msg.what == MSG_INIT_TIMEOUT){    //超时动作
 				if (mHandler != null && timeOutTask != null ){
 					mHandler.removeCallbacks(timeOutTask);
 				}
-
+				//初始化失败的显示信息
 				Toast.makeText(loading.this, "timeout", Toast.LENGTH_LONG).show();
 				loading.this.finish();
 
@@ -52,12 +54,12 @@ public class loading extends Activity {
 				if (mHandler != null && timeOutTask != null ){
 					mHandler.removeCallbacks(timeOutTask);
 				}
-
-
+				
+				//初始化成功，进入主界面MyMindMapActivity
 				startActivity(new Intent(getApplication(),MyMindMapActivity.class));
 				loading.this.finish();
 			}else if(msg.what == MSG_INIT_INFO){
-
+				//正在初始化
 				String info = msg.obj.toString();
 				tvInfo.setText(info);       
 			}
@@ -66,7 +68,7 @@ public class loading extends Activity {
 
 	Runnable timeOutTask = new Runnable() {
 		public void run() {
-
+			//超时
 			isTimeout = true;
 
 			Message msg = Message.obtain();
@@ -110,7 +112,7 @@ public class loading extends Activity {
 			}           
 		}.start();
 	}
-
+	//初始化时
 	private void sendInitInfo(String info){
 		Message msg1 = Message.obtain();
 		msg1.what = MSG_INIT_INFO;
